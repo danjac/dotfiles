@@ -1,0 +1,4 @@
+#!/bin/sh
+ARGS="$@"
+# gnome-terminal -e "vim -u $HOME/.vimrc-gnome $ARGS"
+gnome-terminal -e "vim $ARGS"
