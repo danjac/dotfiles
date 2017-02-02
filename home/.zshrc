@@ -69,6 +69,12 @@ export PATH="$PATH:/home/danjac/.rvm/gems/ruby-1.9.3-p551/bin:/home/danjac/.rvm/
 
 
 
+# needed for virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+source /usr/bin/virtualenvwrapper.sh
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
