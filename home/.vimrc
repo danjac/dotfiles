@@ -18,6 +18,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'mattn/emmet-vim'
 Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 
@@ -135,6 +136,10 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Silver Searcher
+"
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Syntastic
 let g:syntastic_aggregate_errors = 1
