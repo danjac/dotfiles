@@ -10,4 +10,4 @@ output, _ = p.communicate()
 
 src = output.decode()[8:-2]
 os.remove(src)
-os.system("~/bin/rotate_bg.py")
+# os.system("~/bin/rotate_bg.py")

@@ -1,5 +1,6 @@
 set nocompatible
 filetype off
+filetype indent on
 syntax enable
 
 
@@ -19,6 +20,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 
@@ -31,7 +34,10 @@ if has("autocmd")
 endif
 
 " Colors
-colorscheme BlackSea
+" colorscheme BlackSea
+" colorscheme ir_black
+" colorscheme advantage
+colorscheme github
 
 " Powerline setup
 
@@ -47,7 +53,8 @@ let mapleader = "\<Space>"
 :set fileencodings=utf-8
 :set expandtab
 :set tabstop=2
-:set softtabstop=4
+:set shiftwidth=2
+:set softtabstop=2
 :set ignorecase
 :set number
 :set hlsearch
@@ -68,17 +75,17 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " per-syntax
 
-au FileType go setl sw=4 sts=4 et
-au FileType python setl sw=4 sts=4 et
-au FileType html setl sw=2 sts=2 et
-au FileType hbs setl sw=2 sts=2 et
-au FileType css setl sw=2 sts=2 et
-au FileType coffee setl sw=2 sts=2 et
-au FileType javascript setl sw=2 sts=2 et
-au FileType vue setl sw=2 sts=2 et
-au FileType jade setl sw=2 sts=2 et
-au FileType ruby setl sw=2 sts=2 et
-au FileType elixir setl sw=2 sts=2 et
+autocmd FileType go set sw=4 sts=4 et
+autocmd FileType python set sw=4 sts=4 et
+autocmd FileType html set sw=2 sts=2 et
+autocmd FileType hbs set sw=2 sts=2 et
+autocmd FileType css set sw=2 sts=2 et
+autocmd FileType coffee set sw=2 sts=2 et
+autocmd FileType javascript set sw=2 sts=2 et
+autocmd FileType vue set sw=2 sts=2 et
+autocmd FileType jade set sw=2 sts=2 et
+autocmd FileType ruby set sw=2 sts=2 et
+autocmd FileType elixir set sw=2 sts=2 et
 
 " buffers
 nmap <Leader>b :buffers<CR>:buffer<Space>
@@ -155,6 +162,21 @@ let g:syntastic_javascript_jslint_args = ' '
 autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['jshint']
 
 let g:jsx_ext_required = 0 "Allow syntax highlighting in non-jsx files"
+
+" Automatically create a directory on save
+"
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 
 "GVIM specific
 "
